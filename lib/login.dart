@@ -15,7 +15,7 @@ class _LoginPageState extends State<LoginPage> {
 
   // Database sementara berupa daftar pengguna
   final List<Map<String, String>> dummyUsers = [
-    {"username": "dika", "password": "dika111"},
+    {"username": "alif", "password": "alif111"},
   ];
 
   // Variabel untuk mengontrol visibilitas password
