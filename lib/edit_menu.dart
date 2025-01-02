@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
+/// Halaman untuk mengedit data menu yang sudah ada.
 class EditMenuPage extends StatefulWidget {
+  /// Parameter yang diperlukan:
+  /// - [namaMenu]: Nama menu yang akan diedit.
+  /// - [harga]: Harga menu yang akan diedit.
   final String namaMenu;
   final String harga;
 
@@ -11,59 +15,62 @@ class EditMenuPage extends StatefulWidget {
   });
 
   @override
-  // ignore: library_private_types_in_public_api
+  // Membuat state untuk halaman ini
   _EditMenuPageState createState() => _EditMenuPageState();
 }
 
 class _EditMenuPageState extends State<EditMenuPage> {
+  /// Controller untuk input nama menu
   late TextEditingController _namaMenuController;
+  /// Controller untuk input harga menu
   late TextEditingController _hargaController;
+  /// Variabel untuk menyimpan pilihan menu yang dipilih
   String? _selectedMenu;
 
   @override
   void initState() {
     super.initState();
+    // Menginisialisasi controller dengan nilai awal dari widget
     _namaMenuController = TextEditingController(text: widget.namaMenu);
     _hargaController = TextEditingController(text: widget.harga);
 
-    // Inisialisasi _selectedMenu berdasarkan widget.namaMenu jika memungkinkan
-    // Ini penting agar dropdown menampilkan nilai yang benar saat pertama kali dibuka.
-    // Anda perlu logika untuk mencocokkan widget.namaMenu dengan nilai di dropdown.
-    // Contoh sederhana (perlu disesuaikan dengan data menu Anda):
+    // Menentukan pilihan menu berdasarkan nama menu awal
     if (widget.namaMenu == 'Nasi Goreng') {
       _selectedMenu = 'Menu 1';
     } else if (widget.namaMenu == 'Mie Ayam') {
       _selectedMenu = 'Menu 2';
-    } // ... tambahkan kondisi lain sesuai kebutuhan
-    else if(widget.namaMenu == 'Ayam Goreng'){
+    } else if (widget.namaMenu == 'Ayam Goreng') {
       _selectedMenu = 'Menu 3';
-    }
-    else if(widget.namaMenu == 'Es Teh'){
+    } else if (widget.namaMenu == 'Es Teh') {
       _selectedMenu = 'Menu 4';
-    }
-    else if(widget.namaMenu == 'Es Jeruk'){
+    } else if (widget.namaMenu == 'Es Jeruk') {
       _selectedMenu = 'Menu 5';
     }
   }
 
   @override
   void dispose() {
+    // Membersihkan controller saat widget dihancurkan
     _namaMenuController.dispose();
     _hargaController.dispose();
     super.dispose();
   }
 
+  /// Fungsi untuk menyimpan perubahan data menu
   void _saveChanges() {
+    // Mengambil nilai input dari field
     final updatedNamaMenu = _namaMenuController.text;
     final updatedHarga = _hargaController.text;
 
+    // Validasi jika ada field yang kosong
     if (updatedNamaMenu.isEmpty || updatedHarga.isEmpty || _selectedMenu == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Semua kolom harus diisi.")),
       );
-      return; // Penting untuk menghentikan eksekusi jika ada kesalahan
+      return; // Menghentikan proses jika ada kesalahan
     }
 
+    // Mengirim data yang diperbarui kembali ke halaman sebelumnya
     Navigator.pop(context, {
       'namaMenu': updatedNamaMenu,
       'harga': updatedHarga,
@@ -86,6 +93,7 @@ class _EditMenuPageState extends State<EditMenuPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Input untuk Nama Menu
             TextField(
               controller: _namaMenuController,
               decoration: const InputDecoration(
@@ -95,6 +103,7 @@ class _EditMenuPageState extends State<EditMenuPage> {
               ),
             ),
             const SizedBox(height: 16),
+            // Input untuk Harga Menu
             TextField(
               controller: _hargaController,
               decoration: const InputDecoration(
@@ -105,6 +114,7 @@ class _EditMenuPageState extends State<EditMenuPage> {
               keyboardType: TextInputType.number,
             ),
             const SizedBox(height: 24),
+            // Dropdown untuk memilih jenis menu
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               decoration: BoxDecoration(
@@ -132,6 +142,7 @@ class _EditMenuPageState extends State<EditMenuPage> {
               ),
             ),
             const SizedBox(height: 24),
+            // Tombol untuk menyimpan perubahan
             Align(
               alignment: Alignment.centerRight,
               child: ElevatedButton(
