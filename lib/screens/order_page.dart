@@ -19,7 +19,7 @@ class _OrderPageState extends State<OrderPage> {
   final TextEditingController _itemPriceController = TextEditingController();
 
   String? _selectedItem;
-  final List<String> _menuItems = ['Ayam Goreng, Nasi Goreng', 'Soto', 'Es Teh', 'Es Jeruk'];
+  final List<String> _menuItems = ['Ayam Goreng', 'Nasi Goreng', 'Soto', 'Es Teh', 'Es Jeruk'];
   final Map<String, double> _menuPrices = {
     'Ayam Goreng': 15000,
     'Nasi Goreng': 12000,
