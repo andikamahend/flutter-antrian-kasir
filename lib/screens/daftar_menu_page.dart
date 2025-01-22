@@ -22,14 +22,8 @@ class DaftarMenuPage extends StatelessWidget {
           return Card(
             margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
             child: ListTile(
-              leading: Image.asset(
-                menuItem.imageUrl,
-                width: 50,
-                height: 50,
-                fit: BoxFit.cover,
-              ),
               title: Text(menuItem.name),
-              subtitle: Text('${menuItem.description} - Rp${menuItem.price.toStringAsFixed(0)}'),
+              trailing: Text('Rp${menuItem.price.toStringAsFixed(0)}'),
               onTap: () {
                 // Implementasi untuk menampilkan detail menu atau untuk mengedit menu
                 _showMenuItemDetails(context, menuItem);
@@ -57,20 +51,7 @@ class DaftarMenuPage extends StatelessWidget {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(menuItem.name),
-          content: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset(
-                menuItem.imageUrl,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-              const SizedBox(height: 10),
-              Text('Harga: Rp${menuItem.price.toStringAsFixed(0)}'),
-              Text('Deskripsi: ${menuItem.description}'),
-            ],
-          ),
+          content: Text('Harga: Rp${menuItem.price.toStringAsFixed(0)}'),
           actions: <Widget>[
             TextButton(
               child: const Text('Tutup'),

@@ -45,6 +45,11 @@ class ReceiptPage extends StatelessWidget {
                   Text('Nama Pelanggan: ${receipt.customerName}'),
                   Text('Nomor Meja: ${receipt.tableNumber}'),
                   const Divider(),
+                  // Menampilkan tanggal otomatis dari struk
+                  Text(
+                    'Tanggal: ${receipt.date}',
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
                   // Menampilkan nomor antrian otomatis dalam format 2 digit
                   Text(
                     'Nomor Antrian: ${getQueueNumber()}',
